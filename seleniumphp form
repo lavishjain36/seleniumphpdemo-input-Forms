@@ -1,0 +1,58 @@
+package demoselenium;
+
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Seleniumfirst {
+
+	public static void main(String[] args) throws InterruptedException {
+		//set the path of firefox driver executable.
+		
+//		webdriver-interface->chromedriver,
+		System.setProperty("webdriver.chrome.driver", "D://drivernew/chromedriver.exe");
+		
+		//create a new instance of the Firefox driver.
+		WebDriver driver=new ChromeDriver();
+		
+		//Open the google.com 
+		driver.get("https://phptravels.com/demo/");
+	
+		WebElement firstNameField=driver.findElement(By.xpath("//input[@name='first_name']"));
+		firstNameField.sendKeys("John");
+		
+		WebElement lastNameField=driver.findElement(By.xpath("//input[@name='last_name']"));
+		lastNameField.sendKeys("Doe");
+		
+		WebElement businessNameField=driver.findElement(By.xpath("//input[@placeholder='Business Name']"));
+		businessNameField.sendKeys("Guvi pvt.LTd");
+		WebElement email=driver.findElement(By.xpath("//input[@type='email']"));
+		
+		email.sendKeys("john.doe@gmail.com");
+		//Solve the sum of 2 numb1 and num2 and fill that result in the field;
+		int numb1=Integer.parseInt(driver.findElement(By.id("numb1")).getText());
+		int numb2=Integer.parseInt(driver.findElement(By.id("numb2")).getText());
+		
+		int sum=numb1+numb2; 
+		
+		WebElement sumField=driver.findElement(By.cssSelector("#number"));
+		sumField.sendKeys(String.valueOf(sum));
+		Thread.sleep(1000);
+		//submit the form 
+		WebElement submitButton=driver.findElement(By.id("demo"));
+		submitButton.click();
+		 Thread.sleep(2000);
+		WebElement successMessage=driver.findElement(By.cssSelector("h2[class='text-center cw'] strong"));
+		System.out.println((successMessage.getText().contains("Thank you!")));
+	    System.out.println("Form Submitted Successfully");		
+		driver.quit();
+		
+		//verify and check if form is submiited or not 
+		
+		
+	}
+
+}
